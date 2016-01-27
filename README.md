@@ -3,6 +3,8 @@
 3D printed and smartphone controlled camera slider
 
 ![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/cad/render/1.JPG)
+![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7220_3000.jpg)
+![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7254_3000.jpg)
 
 Designed using SolidWorks CAD
 
