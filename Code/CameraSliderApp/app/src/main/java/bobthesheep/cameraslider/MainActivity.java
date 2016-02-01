@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public final static String PREF_IP = "PREF_IP_ADDRESS";
     public final static String PREF_PORT = "PREF_PORT_NUMBER";
     // declare buttons and text inputs
-    private Button buttonPin11,buttonPin12,buttonPin13;
+    private Button button_moveLeft,button_MoveRight, button_SetSpeed;
     private EditText editTextIPAddress, editTextPortNumber;
     // shared preferences objects used to save the IP address and port so that the user doesn't have to
     // type them next time he/she opens the app.
@@ -69,15 +69,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
         editor = sharedPreferences.edit();
 
         // assign buttons
-        buttonPin11 = (Button)findViewById(R.id.buttonPin11);
-        buttonPin12 = (Button)findViewById(R.id.buttonPin12);
-        buttonPin13 = (Button)findViewById(R.id.buttonPin13);
+        button_moveLeft = (Button)findViewById(R.id.move_left);
+        button_MoveRight = (Button)findViewById(R.id.move_right);
+        button_SetSpeed = (Button)findViewById(R.id.SetSpeedButton);
 
+        final WifiManager manager = (WifiManager) super.getSystemService(WIFI_SERVICE);
+        final DhcpInfo dhcp = manager.getDhcpInfo();
+        address = Formatter.formatIpAddress(dhcp.gateway);
 
         // set button listener (this class)
-        buttonPin11.setOnClickListener(this);
-        buttonPin12.setOnClickListener(this);
-        buttonPin13.setOnClickListener(this);
+        button_moveLeft.setOnTouchListener(new RepeatListener(400, 100, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String parameterValue = "1";
+                new HttpRequestAsyncTask("left", parameterValue
+                ).execute();
+            }
+        }));
+        button_MoveRight.setOnTouchListener(new RepeatListener(400, 300, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String parameterValue = "1";
+                new HttpRequestAsyncTask("right", parameterValue
+                ).execute();
+            }
+        }));
+        button_SetSpeed.setOnClickListener(this);
 
 
     }
@@ -92,27 +109,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
         System.out.print("pressed something");
         // get the pin number
         String parameterValue = "";
-
+        String parameterName = "";
         // get the pin number from the button that was clicked
-        if(view.getId()==buttonPin11.getId())
+        if(view.getId()==button_SetSpeed.getId())
         {
-            parameterValue = "11";
+            EditText speedText = (EditText)findViewById(R.id.motorSpeed);
+            parameterValue = String.valueOf(speedText.getText());
+            parameterName = "speed";
         }
-        else if(view.getId()==buttonPin12.getId())
-        {
-            parameterValue = "12";
-        }
-        else
-        {
-            parameterValue = "13";
-        }
-
-        final WifiManager manager = (WifiManager) super.getSystemService(WIFI_SERVICE);
-        final DhcpInfo dhcp = manager.getDhcpInfo();
-        address = Formatter.formatIpAddress(dhcp.gateway);
 
         // execute HTTP request
-        new HttpRequestAsyncTask(parameterValue, "pin"
+        new HttpRequestAsyncTask(parameterName, parameterValue
         ).execute();
     }
 
@@ -136,7 +143,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
 
-        public HttpRequestAsyncTask( String parameterValue, String parameterName)
+        public HttpRequestAsyncTask( String parameterName, String parameterValue)
         {
             this.parameterValue = parameterValue;
             this.parameterName = parameterName;
@@ -159,11 +166,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             return null;
         }
 
-        public void sendRequest(String parameterValue, String parameterName ) throws IOException{
-            String postBody = parameterName + " " + parameterValue + "\n";
+        public void sendRequest(String parameterName, String parameterValue ) throws IOException{
+            String postBody = parameterName + " " + parameterValue + "\n\r";
             Log.d("STATE",postBody);
             Request request = new Request.Builder()
-                    .url("http://"+ address + ":80/?" + parameterName + "=" + parameterValue)
+                    .url("http://"+ "192.168.4.1" + ":80/?" + parameterName+"="+parameterValue)
                     //.post(RequestBody.create(text, postBody))
                     .build();
 
@@ -172,3 +179,4 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 }
+

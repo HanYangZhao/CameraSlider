@@ -4,31 +4,53 @@
     android:layout_height="fill_parent"
     >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-
-
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="15dp">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pin 11"
-            android:id="@+id/buttonPin11" />
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:text="Left"
+            android:id="@+id/move_left"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="400dp" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:text="Right"
+            android:id="@+id/move_right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="10dp" />
+
+        <EditText
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Pin 12"
-            android:id="@+id/buttonPin12" />
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/motorSpeed"
+            android:layout_marginTop="99dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/move_left"
+            android:layout_alignStart="@+id/move_left" />
 
         <Button
-            android:layout_width="match_parent"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pin 13"
-            android:id="@+id/buttonPin13" />
-    </LinearLayout>
-
+            android:text="Set Speed"
+            android:id="@+id/SetSpeedButton"
+            android:layout_alignBottom="@+id/motorSpeed"
+            android:layout_toRightOf="@+id/motorSpeed"
+            android:layout_toEndOf="@+id/motorSpeed" />
+    </RelativeLayout>
 </ScrollView>
