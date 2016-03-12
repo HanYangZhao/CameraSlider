@@ -17,6 +17,7 @@ int stepper_accel = 400;
 long init_pos = 0;
 long current_pos = 0;
 bool accel_enabled = false;
+bool isStop = false;
 
 String s = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>\r\n</html>\n" ;
 
@@ -39,31 +40,30 @@ WiFiServer server(80);
    Serial.println(myIP);
    server.begin();
    Serial.println("server started");
-   stepper.setMaxSpeed(2000);
+   stepper.setMaxSpeed(1000);
+   stepper.setCurrentPosition(stepper.currentPosition ());
+   
  }
-
  void moveSlider(String direction , int speed){
   stepper.setSpeed(speed); 
-  stepper.setAcceleration(stepper_speed / 2);
-  if(direction.equals("left")){
-    Serial.print("moving left");
-    //stepper.moveTo(stepper.currentPosition() + 5);
-    //stepper.setSpeed(speed); 
-    stepper.runToNewPosition (stepper.currentPosition() + 5);
-    
+  
+  if (direction.equals("left")){
+    Serial.println("moving left");
+    stepper.moveTo(0);
+    stepper.setSpeed(speed);   
   }      
-  else{
-    Serial.print("moving right");
-    //stepper.moveTo( stepper.currentPosition() -5);
-    //stepper.setSpeed(speed); 
-    stepper.runToNewPosition(stepper.currentPosition() - 5);
+  else if (direction.equals("right")) {
+    Serial.println("moving right");
+    stepper.moveTo(2000);
+    stepper.setSpeed(speed);
   }
 }
-
 void changeSpeed(int speed){
   stepper_speed = speed;
+  stepper.setAcceleration(speed/2);
   Serial.println(stepper_speed);
 }
+
 void processGetRequest(String url){
   char * req = strdup(url.c_str());
   strtok(req, "?");
@@ -72,35 +72,50 @@ void processGetRequest(String url){
   Serial.println(name);
   Serial.println(value);
 
-  if(name.equals("left"))
+  if (name.equals("left")){
     moveSlider("left" , stepper_speed );
-  else if(name.equals("right"))
+    isStop = false;
+  }
+  else if (name.equals("right")){
     moveSlider("right" , stepper_speed );
-  else if(name.equals("speed"))
+    isStop = false;
+  }
+  else if (name.equals("speed"))
     changeSpeed(value);
+  else if (name.equals("stop")){
+    Serial.println("stopping");
+    isStop = true;
+  }
+  else if( name.equals("reset_pos")){
+    stepper.setCurrentPosition(stepper.currentPosition ());
+  }
 }
 
 void loop() {
-  //stepper.runSpeedToPosition ();
   // Check if a client has connected
-
-  
-  if(stepper.distanceToGo() == 0){
-    WiFiClient client = server.available();
-    if (!client) {
-      return;
-    }
-          // Wait until the client sends some data
-    Serial.println("new client");
-    while(!client.available()){
-      delay(1);
-    }
-    // Read the first line of the request   
-    processGetRequest(client.readStringUntil('\r'));
-    client.flush();
-    client.print(s);
-    client.stop();
+  if (isStop){
+    stepper.stop();
+    //Serial.println("stopped");
+    
   }
+  else if(!isStop){
+    //Serial.println("running");
+    stepper.runSpeed();
+  }
+  
+  WiFiClient client = server.available();
+  if (!client) {
+   return;
+ }
+    //Wait until the client sends some data
+ Serial.println("new client");
+ while (!client.available()){
+  delay(1);
+}
+    // Read the first line of the request   
+processGetRequest(client.readStringUntil('\r'));
+client.print(s);
+client.stop();
 }
 
 

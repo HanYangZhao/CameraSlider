@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public final static String PREF_IP = "PREF_IP_ADDRESS";
     public final static String PREF_PORT = "PREF_PORT_NUMBER";
     // declare buttons and text inputs
-    private Button button_moveLeft,button_MoveRight, button_SetSpeed;
+    private Button button_moveLeft,button_MoveRight, button_SetSpeed, button_stop;
     private EditText editTextIPAddress, editTextPortNumber;
     // shared preferences objects used to save the IP address and port so that the user doesn't have to
     // type them next time he/she opens the app.
@@ -72,6 +72,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_moveLeft = (Button)findViewById(R.id.move_left);
         button_MoveRight = (Button)findViewById(R.id.move_right);
         button_SetSpeed = (Button)findViewById(R.id.SetSpeedButton);
+        button_stop = (Button)findViewById(R.id.stopButton);
 
         final WifiManager manager = (WifiManager) super.getSystemService(WIFI_SERVICE);
         final DhcpInfo dhcp = manager.getDhcpInfo();
@@ -86,7 +87,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 ).execute();
             }
         }));
-        button_MoveRight.setOnTouchListener(new RepeatListener(400, 300, new View.OnClickListener() {
+        button_MoveRight.setOnTouchListener(new RepeatListener(400, 100, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String parameterValue = "1";
@@ -95,6 +96,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }));
         button_SetSpeed.setOnClickListener(this);
+
+        button_stop.setOnClickListener(this);
 
 
     }
@@ -118,6 +121,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             parameterName = "speed";
         }
 
+        if(view.getId() == button_stop.getId()){
+            parameterValue = "0";
+            parameterName = "stop";
+        }
         // execute HTTP request
         new HttpRequestAsyncTask(parameterName, parameterValue
         ).execute();
