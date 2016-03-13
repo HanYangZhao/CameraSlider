@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
+    tools:context=".MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
             android:layout_width="100dp"
             android:layout_height="75dp"
             android:text="Left"
-            android:id="@+id/move_left"
+            android:id="@+id/button_moveLeft"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -24,7 +25,7 @@
             android:layout_width="100dp"
             android:layout_height="75dp"
             android:text="Right"
-            android:id="@+id/move_right"
+            android:id="@+id/button_moveRight"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -37,29 +38,115 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/motorSpeed"
+            android:id="@+id/field_motorSpeed"
             android:layout_marginTop="99dp"
             android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/move_left"
-            android:layout_alignStart="@+id/move_left" />
+            android:layout_alignLeft="@+id/button_moveLeft"
+            android:layout_alignStart="@+id/button_moveLeft"
+            android:text="800" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Speed"
-            android:id="@+id/SetSpeedButton"
-            android:layout_alignBottom="@+id/motorSpeed"
-            android:layout_toRightOf="@+id/motorSpeed"
-            android:layout_toEndOf="@+id/motorSpeed" />
+            android:id="@+id/button_setSpeed"
+            android:layout_alignBaseline="@+id/field_motorSpeed"
+            android:layout_alignBottom="@+id/field_motorSpeed"
+            android:layout_toRightOf="@+id/field_motorSpeed"
+            android:layout_toEndOf="@+id/field_motorSpeed" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="75dp"
             android:text="Stop"
-            android:id="@+id/stopButton"
+            android:id="@+id/button_stop"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_alignTop="@+id/move_left" />
+            android:layout_alignTop="@+id/button_moveLeft" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:text="Reset "
+            android:id="@+id/button_reset"
+            android:layout_above="@+id/button_stop"
+            android:layout_alignLeft="@+id/button_stop"
+            android:layout_alignStart="@+id/button_stop" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/field_steps"
+            android:layout_below="@+id/button_setSpeed"
+            android:layout_alignLeft="@+id/field_motorSpeed"
+            android:layout_alignStart="@+id/field_motorSpeed"
+            android:autoText="false"
+            android:text="3000" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Steps"
+            android:id="@+id/button_setSteps"
+            android:layout_alignBottom="@+id/field_steps"
+            android:layout_toRightOf="@+id/field_steps"
+            android:layout_toEndOf="@+id/field_steps" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Time(mins)"
+            android:id="@+id/button_setTime"
+            android:layout_above="@+id/button_setSpeed"
+            android:layout_toRightOf="@+id/field_motorSpeed"
+            android:layout_toEndOf="@+id/field_motorSpeed" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/field_time"
+            android:layout_above="@+id/button_setSpeed"
+            android:layout_alignLeft="@+id/field_motorSpeed"
+            android:layout_alignStart="@+id/field_motorSpeed"
+            android:text="60" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Timelapse"
+            android:id="@+id/switch_timelapse"
+            android:checked="false"
+            android:layout_above="@+id/button_stop"
+            android:layout_alignLeft="@+id/button_moveLeft"
+            android:layout_alignStart="@+id/button_moveLeft" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Accel"
+            android:id="@+id/button_setAccel"
+            android:layout_below="@+id/field_steps"
+            android:layout_toRightOf="@+id/field_steps"
+            android:layout_toEndOf="@+id/field_steps" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/field_accel"
+            android:layout_alignTop="@+id/button_setAccel"
+            android:layout_toLeftOf="@+id/button_setAccel"
+            android:layout_toStartOf="@+id/button_setAccel"
+            android:text="400" />
+
     </RelativeLayout>
 </ScrollView>

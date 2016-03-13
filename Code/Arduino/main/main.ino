@@ -13,9 +13,11 @@ const char *ssid = "CameraSlider";
 const char *password = "thereisnospoon";
 
 int stepper_speed = 800;
+int max_stepper_speed = 2000;
 int stepper_accel = 400;
 long init_pos = 0;
 long current_pos = 0;
+long steps = 2000;
 bool accel_enabled = false;
 bool isStop = false;
 
@@ -40,22 +42,30 @@ WiFiServer server(80);
    Serial.println(myIP);
    server.begin();
    Serial.println("server started");
-   stepper.setMaxSpeed(1000);
+   stepper.setMaxSpeed(3000);
    stepper.setCurrentPosition(stepper.currentPosition ());
-   
+   Serial.println("current_position");
+   Serial.println(stepper.currentPosition());
  }
  void moveSlider(String direction , int speed){
-  stepper.setSpeed(speed); 
+    stepper.setSpeed(speed); 
   
   if (direction.equals("left")){
     Serial.println("moving left");
-    stepper.moveTo(0);
-    stepper.setSpeed(speed);   
+    //stepper.setSpeed(speed); 
+    stepper.move(steps);
+      
   }      
   else if (direction.equals("right")) {
+    long start_pos = stepper.currentPosition();
     Serial.println("moving right");
-    stepper.moveTo(2000);
-    stepper.setSpeed(speed);
+    //stepper.setSpeed(speed);
+    stepper.move(-steps);
+  }
+
+  else if (direction.equals("reset")){
+    Serial.println("reset to 0");
+    stepper.moveTo(0);
   }
 }
 void changeSpeed(int speed){
@@ -87,7 +97,7 @@ void processGetRequest(String url){
     isStop = true;
   }
   else if( name.equals("reset_pos")){
-    stepper.setCurrentPosition(stepper.currentPosition ());
+    moveSlider("reset" , max_stepper_speed );
   }
 }
 
@@ -96,11 +106,11 @@ void loop() {
   if (isStop){
     stepper.stop();
     //Serial.println("stopped");
-    
   }
-  else if(!isStop){
+  else if (!isStop && stepper.distanceToGo() != 0){
     //Serial.println("running");
     stepper.runSpeed();
+    Serial.println(stepper.currentPosition());
   }
   
   WiFiClient client = server.available();
