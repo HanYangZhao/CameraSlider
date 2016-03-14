@@ -11,6 +11,7 @@ import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
@@ -33,8 +34,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public final static String PREF_IP = "PREF_IP_ADDRESS";
     public final static String PREF_PORT = "PREF_PORT_NUMBER";
     // declare buttons and text inputs
-    private Button button_moveLeft,button_moveRight, button_setSpeed, button_stop , button_reset , button_setSteps , button_setTime , button_setAccel;
-    Switch timelapse_switch;
+    private Button button_moveLeft,button_moveRight, button_setSpeed, button_stop , button_reset , button_setSteps , button_setTime , button_setAccel , button_recalibrate;
+    Switch switch_timelapse , switch_microstep;
     private EditText editTextIPAddress, editTextPortNumber;
     // shared preferences objects used to save the IP address and port so that the user doesn't have to
     // type them next time he/she opens the app.
@@ -60,7 +61,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_setTime = (Button) findViewById(R.id.button_setTime);
         button_setSteps = (Button) findViewById(R.id.button_setSteps);
         button_setAccel = (Button) findViewById(R.id.button_setAccel);
-        timelapse_switch = (Switch) findViewById(R.id.switch_timelapse);
+        button_recalibrate = (Button) findViewById(R.id.button_recalibrate);
+        switch_timelapse = (Switch) findViewById(R.id.switch_timelapse);
+        switch_microstep = (Switch) findViewById(R.id.switch_microstep);
         final WifiManager manager = (WifiManager) super.getSystemService(WIFI_SERVICE);
         final DhcpInfo dhcp = manager.getDhcpInfo();
         address = Formatter.formatIpAddress(dhcp.gateway);
@@ -90,8 +93,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_setSteps.setOnClickListener(this);
         button_setTime.setOnClickListener(this);
         button_setAccel.setOnClickListener(this);
+        button_reset.setOnClickListener(this);
+        button_recalibrate.setOnClickListener(this);
 
+        switch_timelapse.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    disableButtonsForTimelapse();
+                }
+                else{
+                    enableAllButtons();
+                }
 
+            }
+        });
     }
 
     protected void handleException(Exception e) {
@@ -130,7 +145,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             parameterName = "accel";
         }
         else if (view.getId() == button_moveRight.getId()){
-            if(timelapse_switch.isChecked()){
+            if(switch_timelapse.isChecked()){
                 parameterName = "timelapse_right";
             }
             else{
@@ -141,7 +156,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         }
         else if (view.getId() == button_moveLeft.getId()){
-            if(timelapse_switch.isChecked()){
+            if(switch_timelapse.isChecked()){
                 parameterName =  "timelapse_left";
             }
             else{
@@ -156,7 +171,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             parameterName = "reset_pos";
             enableAllButtons();
         }
-        else if(view.getId() == button_stop.getId()){
+
+        else if (view.getId() == button_recalibrate.getId()){
+            parameterValue = "0";
+            parameterName = "recalibrate";
+        }
+        else if (view.getId() == button_stop.getId()){
             parameterValue = "0";
             parameterName = "stop";
             enableAllButtons();
@@ -186,11 +206,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_setSteps.setClickable(false);
         button_setSpeed.setClickable(false);
         button_reset.setClickable(false);
+        button_recalibrate.setClickable(false);
         button_setAccel.setAlpha(.5f);
         button_setTime.setAlpha(.5f);
         button_setSteps.setAlpha(.5f);
         button_setSpeed.setAlpha(.5f);
         button_reset.setAlpha(.5f);
+        button_recalibrate.setAlpha(.5f);
+
+    }
+
+    public void disableButtonsForTimelapse(){
+        button_setAccel.setClickable(false);
+        button_setSteps.setClickable(false);
+        button_setSpeed.setClickable(false);
+
+        button_setAccel.setAlpha(.5f);
+        button_setSteps.setAlpha(.5f);
+        button_setSpeed.setAlpha(.5f);
 
     }
 
@@ -203,6 +236,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_moveLeft.setClickable(true);
         button_moveRight.setClickable(true);
         button_reset.setClickable(true);
+        button_recalibrate.setClickable(true);
         button_setAccel.setAlpha(1);
         button_setTime.setAlpha(1);
         button_setSteps.setAlpha(1);
@@ -210,6 +244,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_moveLeft.setAlpha(1);
         button_moveRight.setAlpha(1);
         button_reset.setAlpha(1);
+        button_recalibrate.setAlpha(1);
 
     }
     /**

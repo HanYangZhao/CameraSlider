@@ -36,7 +36,7 @@
         <EditText
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/field_motorSpeed"
             android:layout_marginTop="99dp"
@@ -68,7 +68,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:text="Reset "
+            android:text="Re-Position"
             android:id="@+id/button_reset"
             android:layout_above="@+id/button_stop"
             android:layout_alignLeft="@+id/button_stop"
@@ -84,7 +84,7 @@
             android:layout_alignLeft="@+id/field_motorSpeed"
             android:layout_alignStart="@+id/field_motorSpeed"
             android:autoText="false"
-            android:text="3000" />
+            android:text="29000" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -147,6 +147,45 @@
             android:layout_toLeftOf="@+id/button_setAccel"
             android:layout_toStartOf="@+id/button_setAccel"
             android:text="400" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Micro-step"
+            android:id="@+id/switch_microstep"
+            android:checked="false"
+            android:layout_alignTop="@+id/button_reset"
+            android:layout_alignLeft="@+id/switch_timelapse"
+            android:layout_alignStart="@+id/switch_timelapse" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:text="Recalib"
+            android:id="@+id/button_recalibrate"
+            android:layout_alignTop="@+id/button_reset"
+            android:layout_alignLeft="@+id/button_moveRight"
+            android:layout_alignStart="@+id/button_moveRight" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="max = 25000"
+            android:id="@+id/textView"
+            android:layout_above="@+id/button_setSteps"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_alignStart="@+id/textView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="max = 29000"
+            android:id="@+id/textView2"
+            android:layout_alignBottom="@+id/button_setSteps"
+            android:layout_toRightOf="@+id/button_setAccel"
+            android:layout_toEndOf="@+id/button_setAccel" />
 
     </RelativeLayout>
 </ScrollView>

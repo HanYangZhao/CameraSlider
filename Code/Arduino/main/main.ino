@@ -12,13 +12,13 @@ AccelStepper stepper(1,5,4);
 const char *ssid = "CameraSlider";
 const char *password = "thereisnospoon";
 
-int stepper_speed = 800;
-int max_stepper_speed = 2000;
+float stepper_speed = 800;
+int max_stepper_speed = 25000;
 int stepper_accel = 400;
 int timelapse_mins = 60;
 long init_pos = 0;
 long current_pos = 0;
-long steps = 2000;
+long steps = 29000;
 bool accel_enabled = false;
 bool isStop = false;
 
@@ -43,66 +43,89 @@ WiFiServer server(80);
    Serial.println(myIP);
    server.begin();
    Serial.println("server started");
-   stepper.setMaxSpeed(3000);
-   stepper.setCurrentPosition(stepper.currentPosition ());
+   stepper.setMaxSpeed(max_stepper_speed);
+   stepper.setCurrentPosition(0);
    Serial.println("current_position");
    Serial.println(stepper.currentPosition());
  }
- void moveSlider(String direction , int speed){
-    stepper.setSpeed(speed); 
-  
+ void moveSlider(String direction){ 
   if (direction.equals("left")){
     Serial.println("moving left");
     //stepper.setSpeed(speed); 
     stepper.move(steps);
-      
+    stepper.setSpeed(stepper_speed); 
   }      
   else if (direction.equals("right")) {
     long start_pos = stepper.currentPosition();
     Serial.println("moving right");
-    //stepper.setSpeed(speed);
     stepper.move(-steps);
+    stepper.setSpeed(-stepper_speed);
   }
 
   else if (direction.equals("reset")){
     Serial.println("reset to 0");
-    stepper.moveTo(0);
+    stepper.move(stepper.currentPosition()); 
+    stepper.setSpeed(stepper_speed); 
   }
 }
-void changeSpeed(int speed){
-  stepper_speed = speed;
-  stepper.setAcceleration(speed/2);
+void changeSpeed(float mot_speed){
+  stepper_speed = mot_speed;
+  stepper.setAcceleration(mot_speed/2);
   Serial.println(stepper_speed);
 }
 
 void timelapse(String direction){
-  
+  int timelapse_speed = (int) 30287 * pow(2.7183, (-0.013 * timelapse_mins));
+  if (direction.equals("left")){
+     stepper.move(steps);
+     stepper.setSpeed(timelapse_speed);     
+  }
+
+  else if (direction.equals("right")){
+    stepper.move(-steps);
+    stepper.setSpeed(-timelapse_speed);
+  }
 }
 
 void processGetRequest(String url){
   char * req = strdup(url.c_str());
+  float rev_speed = 0.0f;
+  int rev_data = 0;
   strtok(req, "?");
   String name = strtok(NULL, "=");
-  int value = atoi(strtok(NULL , "="));
+  if (name.equals("speed"))
+    rev_speed = atof(strtok(NULL , "="));
+  else {
+     rev_data = atoi(strtok(NULL , "="));
+  }
+  
   Serial.println(name);
-  Serial.println(value);
 
   if (name.equals("left")){
-    moveSlider("left" , stepper_speed );
+    moveSlider("left");
     isStop = false;
   }
   else if (name.equals("right")){
-    moveSlider("right" , stepper_speed );
+    moveSlider("right");
     isStop = false;
   }
   else if (name.equals("speed"))
-    changeSpeed(value);
+    changeSpeed(rev_speed);
   else if (name.equals("stop")){
     Serial.println("stopping");
     isStop = true;
   }
   else if (name.equals("reset_pos")){
-    moveSlider("reset" , max_stepper_speed );
+    moveSlider("reset");
+    isStop = false;
+  }
+
+  else if (name.equals("steps")){
+    steps = rev_data;
+  }
+  else if (name.equals("recalibrate")){
+    stepper.setCurrentPosition(0);
+    Serial.println(stepper.currentPosition());
   }
   else if (name.equals("timelapse_right")){
     timelapse("right");
@@ -111,7 +134,7 @@ void processGetRequest(String url){
     timelapse("left");
   }
   else if (name.equals("mins")){
-    timelapse_mins = value;
+    timelapse_mins = rev_data;
   }
 }
 
