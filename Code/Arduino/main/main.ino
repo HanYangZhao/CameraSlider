@@ -15,6 +15,7 @@ const char *password = "thereisnospoon";
 int stepper_speed = 800;
 int max_stepper_speed = 2000;
 int stepper_accel = 400;
+int timelapse_mins = 60;
 long init_pos = 0;
 long current_pos = 0;
 long steps = 2000;
@@ -74,6 +75,10 @@ void changeSpeed(int speed){
   Serial.println(stepper_speed);
 }
 
+void timelapse(String direction){
+  
+}
+
 void processGetRequest(String url){
   char * req = strdup(url.c_str());
   strtok(req, "?");
@@ -96,8 +101,17 @@ void processGetRequest(String url){
     Serial.println("stopping");
     isStop = true;
   }
-  else if( name.equals("reset_pos")){
+  else if (name.equals("reset_pos")){
     moveSlider("reset" , max_stepper_speed );
+  }
+  else if (name.equals("timelapse_right")){
+    timelapse("right");
+  }
+  else if (name.equals("timelaspe_left")){
+    timelapse("left");
+  }
+  else if (name.equals("mins")){
+    timelapse_mins = value;
   }
 }
 
