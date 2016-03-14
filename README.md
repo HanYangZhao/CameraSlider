@@ -14,9 +14,9 @@ This project started with me wanting to take timelapse photos and videos where t
 
 Designed using SolidWorks CAD
 
-![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7220_3000.jpg)
+![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7650.JPG)
 
-![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7254_3000.jpg)
+![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7469.JPG)
 
 
 
@@ -60,6 +60,14 @@ NEMA 17 Stepper motor with 2x20 Tooth GT2 gears to drive the plate.
 #Hardware assembly
 
 Hardware assembly is pretty self-explanatory. You can use the photos in the photo folder to get the idea. The top plate to support the camera includes a hole for 1/4 inch bolts and 3/8 inch bolts. You can either attach you camera directly to the plate or use a micro sliding plate to better control the balance of camera on the plate. This is especially useful for big and heavy camera like the d800.
+
+<img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7224_3000.jpg" alt="plate" style="width: 200px;"/>
+<img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7653.jpg" alt="plate" style="width: 200px;"/>
+<img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7654.jpg" alt="plate" style="width: 200px;"/>
+<img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7225_3000.jpg" alt="plate" style="width: 200px;"/>
+<img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7220_3000.jpg" alt="plate" style="width: 200px;"/>
+<img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7223_3000.jpg" alt="plate" style="width: 200px;"/>
+
 
 To connect the electronics. Use [this guide] (https://www.pololu.com/product/2128)
 
