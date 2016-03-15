@@ -10,6 +10,14 @@ This project started with me wanting to take timelapse photos and videos where t
 
 -iOS app
 
+#Test Footage 
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=VQx5hUlplgQ
+" target="_blank"><img src="http://img.youtube.com/vi/VQx5hUlplgQ/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
+#Photos 
+
 ![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/cad/render/1.JPG)
 
 Designed using SolidWorks CAD
