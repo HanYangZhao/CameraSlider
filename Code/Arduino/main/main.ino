@@ -6,21 +6,26 @@
 #include <ESP8266WebServer.h>
 #include <AccelStepper.h>
 #include "Timer.h";
+
 AccelStepper stepper(1,5,4);
 //pin 5 step, pin 4 dir
+
 /* Set these to your desired credentials. */
 const char *ssid = "CameraSlider";
 const char *password = "thereisnospoon";
 
-float stepper_speed = 800;
+float stepper_speed = 10000;
 int max_stepper_speed = 25000;
-int stepper_accel = 400;
+int stepper_accel = 10000;
 int timelapse_mins = 60;
 long init_pos = 0;
 long current_pos = 0;
 long steps = 29000;
 bool accel_enabled = false;
 bool isStop = false;
+int MS1 = 12;
+int MS2 = 13;
+int MS3 = 14;
 
 String s = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>\r\n</html>\n" ;
 
@@ -31,6 +36,13 @@ WiFiServer server(80);
  */
 
  void setup() {
+   pinMode(MS1, OUTPUT);
+   pinMode(MS2, OUTPUT);
+   pinMode(MS3, OUTPUT);
+   //Microstepping is set to 1/4
+   digitalWrite(MS1, LOW);
+   digitalWrite(MS2, HIGH);
+   digitalWrite(MS3, LOW);
    delay(1000);
    Serial.begin(115200);
    Serial.println();
@@ -70,12 +82,14 @@ WiFiServer server(80);
 }
 void changeSpeed(float mot_speed){
   stepper_speed = mot_speed;
-  stepper.setAcceleration(mot_speed/2);
+  stepper.setAcceleration(mot_speed/4);
   Serial.println(stepper_speed);
 }
 
 void timelapse(String direction){
   int timelapse_speed = (int) 30287 * pow(2.7183, (-0.013 * timelapse_mins));
+  if (timelapse_speed > 25000)
+    timelapse_speed = 25000;
   if (direction.equals("left")){
      stepper.move(steps);
      stepper.setSpeed(timelapse_speed);     
@@ -136,8 +150,15 @@ void processGetRequest(String url){
   else if (name.equals("mins")){
     timelapse_mins = rev_data;
   }
-}
 
+  else if (name.equals("accel_enabled")){
+    accel_enabled = rev_data;
+  }
+
+  else if (name.equals("set_accel")){
+    stepper.setAcceleration(rev_data);
+  }
+}
 void loop() {
   // Check if a client has connected
   if (isStop){
@@ -145,10 +166,13 @@ void loop() {
     //Serial.println("stopped");
   }
   else if (!isStop && stepper.distanceToGo() != 0){
-    //Serial.println("running");
-    stepper.runSpeed();
+    if (!accel_enabled)
+      stepper.runSpeed();
+    else if (accel_enabled)
+      stepper.run();
     Serial.println(stepper.currentPosition());
   }
+
   
   WiFiClient client = server.available();
   if (!client) {
@@ -159,10 +183,11 @@ void loop() {
  while (!client.available()){
   delay(1);
 }
-    // Read the first line of the request   
-processGetRequest(client.readStringUntil('\r'));
-client.print(s);
-client.stop();
+  // Read the first line of the request   
+  processGetRequest(client.readStringUntil('\r'));
+  client.print(s);
+  client.stop();
+  
 }
 
 

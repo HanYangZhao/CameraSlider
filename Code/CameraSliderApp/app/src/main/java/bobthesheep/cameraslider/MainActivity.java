@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public final static String PREF_PORT = "PREF_PORT_NUMBER";
     // declare buttons and text inputs
     private Button button_moveLeft,button_moveRight, button_setSpeed, button_stop , button_reset , button_setSteps , button_setTime , button_setAccel , button_recalibrate;
-    Switch switch_timelapse , switch_microstep;
+    Switch switch_timelapse , switch_acceleration;
     private EditText editTextIPAddress, editTextPortNumber;
     // shared preferences objects used to save the IP address and port so that the user doesn't have to
     // type them next time he/she opens the app.
@@ -63,28 +63,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_setAccel = (Button) findViewById(R.id.button_setAccel);
         button_recalibrate = (Button) findViewById(R.id.button_recalibrate);
         switch_timelapse = (Switch) findViewById(R.id.switch_timelapse);
-        switch_microstep = (Switch) findViewById(R.id.switch_microstep);
+        switch_acceleration = (Switch) findViewById(R.id.switch_acceleration);
         final WifiManager manager = (WifiManager) super.getSystemService(WIFI_SERVICE);
         final DhcpInfo dhcp = manager.getDhcpInfo();
         address = Formatter.formatIpAddress(dhcp.gateway);
 
-        // set button listener (this class)
-//        button_moveLeft.setOnTouchListener(new RepeatListener(400, 100, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String parameterValue = "1";
-//                new HttpRequestAsyncTask("left", parameterValue
-//                ).execute();
-//            }
-//        }));
-//        button_MoveRight.setOnTouchListener(new RepeatListener(400, 100, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String parameterValue = "1";
-//                new HttpRequestAsyncTask("right", parameterValue
-//                ).execute();
-//            }
-//        }));
+        button_setAccel.setClickable(false);
+        button_setAccel.setAlpha(0.5f);
 
         button_moveLeft.setOnClickListener(this);
         button_moveRight.setOnClickListener(this);
@@ -96,18 +81,53 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_reset.setOnClickListener(this);
         button_recalibrate.setOnClickListener(this);
 
-        switch_timelapse.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    disableButtonsForTimelapse();
-                }
-                else{
-                    enableAllButtons();
-                }
 
+        CompoundButton.OnCheckedChangeListener multiListener = new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch (buttonView.getId()){
+                    case R.id.switch_timelapse:
+                        if(isChecked){
+                            disableButtonsForTimelapse();
+                        }
+                        else{
+                            enableAllButtons();
+                        }
+                        break;
+                    case R.id.switch_acceleration:
+                        String parameterName;
+                        String parameterValue;
+                        if(isChecked){
+                            parameterName = "accel_enabled";
+                            parameterValue = "1";
+                            button_setAccel.setClickable(true);
+                            button_setAccel.setAlpha(1);
+                        }
+                        else{
+                            parameterName = "accel_enabled";
+                            parameterValue = "0";
+                            button_setAccel.setClickable(false);
+                            button_setAccel.setAlpha(0.5f);
+                        }
+
+                        new HttpRequestAsyncTask(parameterName, parameterValue
+                        ).execute();
+                        break;
+                }
             }
-        });
+        };
+
+        ((Switch) findViewById(R.id.switch_timelapse)).setOnCheckedChangeListener(multiListener);
+        ((Switch) findViewById(R.id.switch_acceleration)).setOnCheckedChangeListener(multiListener);
+
+
+
+
+
     }
+
+
+
 
     protected void handleException(Exception e) {
         e.printStackTrace();
@@ -121,8 +141,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         String parameterValue = "";
         String parameterName = "";
         // get the pin number from the button that was clicked
-
-
 
         if (view.getId()== button_setSpeed.getId()) {
             EditText speedText = (EditText)findViewById(R.id.field_motorSpeed);
@@ -142,7 +160,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         else if (view.getId() == button_setAccel.getId()){
             EditText speedText = (EditText)findViewById(R.id.field_accel);
             parameterValue = String.valueOf(speedText.getText());
-            parameterName = "accel";
+            parameterName = "set_accel";
         }
         else if (view.getId() == button_moveRight.getId()){
             if(switch_timelapse.isChecked()){
@@ -151,7 +169,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             else{
                 parameterName =  "right";
             }
-            disableLeftButtons();
+            disableSettingButtons();
             parameterValue = "1";
 
         }
@@ -162,7 +180,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             else{
                 parameterName = "left";
             }
-            disableRightButtons();
+            disableSettingButtons();
             parameterValue = "1";
 
         }
@@ -190,17 +208,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_moveRight.setClickable(false);
         button_moveLeft.setClickable(false);
         button_moveRight.setAlpha(.5f);
-        disableAllButtons();
+        disableSettingButtons();
     }
 
     public void disableLeftButtons(){
         button_moveLeft.setClickable(false);
         button_moveRight.setClickable(false);
         button_moveLeft.setAlpha(.5f);
-        disableAllButtons();
+        disableSettingButtons();
     }
 
-    public void disableAllButtons(){
+    public void disableSettingButtons(){
         button_setAccel.setClickable(false);
         button_setTime.setClickable(false);
         button_setSteps.setClickable(false);
@@ -232,12 +250,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_setTime.setClickable(true);
         button_setSteps.setClickable(true);
         button_setSpeed.setClickable(true);
-        button_setAccel.setClickable(true);
+
         button_moveLeft.setClickable(true);
         button_moveRight.setClickable(true);
         button_reset.setClickable(true);
         button_recalibrate.setClickable(true);
-        button_setAccel.setAlpha(1);
+
         button_setTime.setAlpha(1);
         button_setSteps.setAlpha(1);
         button_setSpeed.setAlpha(1);
@@ -245,6 +263,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_moveRight.setAlpha(1);
         button_reset.setAlpha(1);
         button_recalibrate.setAlpha(1);
+        if (switch_acceleration.isChecked()){
+            button_setAccel.setClickable(true);
+            button_setAccel.setAlpha(1);
+        }
 
     }
     /**
