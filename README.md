@@ -22,6 +22,8 @@ alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 Designed using SolidWorks CAD
 
+![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/app.png)
+
 ![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7650.JPG)
 
 ![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7649.JPG)
