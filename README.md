@@ -1,6 +1,4 @@
-# CameraSlider
-
-Smartphone controlled camera slider using 3D Printed parts and Esp8266
+# Smartphone controlled camera slider using 3D Printed parts and Esp8266
 
 This project started with me wanting to take timelapse photos and videos where the camera is sliding on a set of rails. Because my primary application was timelapse photos, I wanted something that was motorized and automated so that I don't have to manually adjust the slider and cause inconsistency the the photos. Additionally, I wanted to be able to control the rig with a smartphone. Commercial products costs over 500$ and none of them are wireless so I thought I'd make something for much cheaper using 3D printed parts and off the shelf components. The final total cost was under 100$. It is still an ongoing project.
 
