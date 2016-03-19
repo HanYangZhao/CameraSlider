@@ -4,7 +4,6 @@ This project started with me wanting to take timelapse photos and videos where t
 
 #TODO: 
 
--Put all the electronics in a box
 
 -iOS app
 
@@ -20,14 +19,11 @@ alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 Designed using SolidWorks CAD
 
+![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_0076-2_3000.jpg)
+
 ![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/app.png)
 
 ![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7650.JPG)
-
-![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7649.JPG)
-
-
-
 
 #Materials
 
@@ -75,6 +71,7 @@ Hardware assembly is pretty self-explanatory. You can use the photos in the phot
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7225_3000.jpg" alt="plate" style="width: 200px;"/>
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7220_3000.jpg" alt="plate" style="width: 200px;"/>
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7223_3000.jpg" alt="plate" style="width: 200px;"/>
+<img scr="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7717-2_3000.jpg" alt="box" style="width : 200px;"/>
 
 
 To connect the electronics. Use [this guide] (https://www.pololu.com/product/2128)
