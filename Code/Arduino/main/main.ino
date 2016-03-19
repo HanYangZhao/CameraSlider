@@ -23,8 +23,8 @@ long current_pos = 0;
 long steps = 29000;
 bool accel_enabled = false;
 bool isStop = false;
-int MS1 = 12;
-int MS2 = 13;
+int MS1 = 13;
+int MS2 = 12;
 int MS3 = 14;
 
 String s = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>\r\n</html>\n" ;
@@ -64,20 +64,20 @@ WiFiServer server(80);
   if (direction.equals("left")){
     Serial.println("moving left");
     //stepper.setSpeed(speed); 
-    stepper.move(steps);
-    stepper.setSpeed(stepper_speed); 
+    stepper.move(-steps);
+    stepper.setSpeed(-stepper_speed); 
   }      
   else if (direction.equals("right")) {
     long start_pos = stepper.currentPosition();
     Serial.println("moving right");
-    stepper.move(-steps);
-    stepper.setSpeed(-stepper_speed);
+    stepper.move(steps);
+    stepper.setSpeed(stepper_speed);
   }
 
   else if (direction.equals("reset")){
     Serial.println("reset to 0");
-    stepper.move(stepper.currentPosition()); 
-    stepper.setSpeed(stepper_speed); 
+    stepper.move(-stepper.currentPosition()); 
+    stepper.setSpeed(-stepper_speed); 
   }
 }
 void changeSpeed(float mot_speed){
