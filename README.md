@@ -70,7 +70,6 @@ Hardware assembly is pretty self-explanatory. You can use the photos in the phot
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7654.JPG" alt="plate" style="width: 200px;"/>
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7225_3000.jpg" alt="plate" style="width: 200px;"/>
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7220_3000.jpg" alt="plate" style="width: 200px;"/>
-<img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7223_3000.jpg" alt="plate" style="width: 200px;"/>
 <img scr="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7717-2_3000.jpg" alt="box" style="width: 200px;"/>
 
 
