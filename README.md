@@ -23,7 +23,7 @@ Designed using SolidWorks CAD
 
 ![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/app.png)
 
-
+![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7650.JPG)
 
 #Materials
 
@@ -70,13 +70,13 @@ Hardware assembly is pretty self-explanatory. You can use the photos in the phot
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7654.JPG" alt="plate" style="width: 200px;"/>
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7225_3000.jpg" alt="plate" style="width: 200px;"/>
 <img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7220_3000.jpg" alt="plate" style="width: 200px;"/>
+<img src="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7223_3000.jpg" alt="plate" style="width: 200px;"/>
 <img scr="https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7717-2_3000.jpg" alt="box" style="width: 200px;"/>
+
 
 To connect the electronics. Use [this guide] (https://www.pololu.com/product/2128)
 
 ![alt-text](https://a.pololu-files.com/picture/0J4069.600.png)
-
-![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/Photos/DSC_7650.JPG)
 
 The MCU will be the esp8266 and the 8-35V input will be the output of the 5 to 12V converter (the 2A one)
 
