@@ -70,6 +70,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         button_setAccel.setClickable(false);
         button_setAccel.setAlpha(0.5f);
+        button_setTime.setClickable(false);
+        button_setTime.setAlpha(0.5f);
 
         button_moveLeft.setOnClickListener(this);
         button_moveRight.setOnClickListener(this);
@@ -88,10 +90,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 switch (buttonView.getId()){
                     case R.id.switch_timelapse:
                         if(isChecked){
-                            disableButtonsForTimelapse();
+                            button_enableTimelapse();
                         }
                         else{
-                            enableAllButtons();
+                           button_disableTimelapse();
                         }
                         break;
                     case R.id.switch_acceleration:
@@ -234,7 +236,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
-    public void disableButtonsForTimelapse(){
+    public void button_enableTimelapse(){
         button_setAccel.setClickable(false);
         button_setSteps.setClickable(false);
         button_setSpeed.setClickable(false);
@@ -243,11 +245,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_setSteps.setAlpha(.5f);
         button_setSpeed.setAlpha(.5f);
 
+        button_setTime.setClickable(true);
+        button_setTime.setAlpha(1);
+
     }
 
+    public void button_disableTimelapse(){
+        button_setAccel.setClickable(true);
+        button_setSteps.setClickable(true);
+        button_setSpeed.setClickable(true);
+
+        button_setAccel.setAlpha(1);
+        button_setSteps.setAlpha(1);
+        button_setSpeed.setAlpha(1);
+
+        button_setTime.setClickable(false);
+        button_setTime.setAlpha(0.5f);
+
+    }
     public void enableAllButtons(){
         button_setAccel.setClickable(true);
-        button_setTime.setClickable(true);
+
         button_setSteps.setClickable(true);
         button_setSpeed.setClickable(true);
 
@@ -256,7 +274,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button_reset.setClickable(true);
         button_recalibrate.setClickable(true);
 
-        button_setTime.setAlpha(1);
+
         button_setSteps.setAlpha(1);
         button_setSpeed.setAlpha(1);
         button_moveLeft.setAlpha(1);
@@ -266,6 +284,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (switch_acceleration.isChecked()){
             button_setAccel.setClickable(true);
             button_setAccel.setAlpha(1);
+        }
+
+        if(switch_timelapse.isChecked()){
+            button_setTime.setAlpha(1);
+            button_setTime.setClickable(true);
         }
 
     }

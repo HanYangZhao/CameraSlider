@@ -171,11 +171,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="max = 25000"
+            android:text="max = 15000"
             android:id="@+id/textView"
-            android:layout_above="@+id/button_setSteps"
-            android:layout_alignLeft="@+id/textView2"
-            android:layout_alignStart="@+id/textView2" />
+            android:layout_above="@+id/textView3"
+            android:layout_alignRight="@+id/textView3"
+            android:layout_alignEnd="@+id/textView3" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -183,9 +183,20 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="max = 29000"
             android:id="@+id/textView2"
-            android:layout_alignBottom="@+id/button_setSteps"
+            android:layout_alignBaseline="@+id/field_steps"
+            android:layout_alignBottom="@+id/field_steps"
             android:layout_toRightOf="@+id/button_setAccel"
             android:layout_toEndOf="@+id/button_setAccel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="10 = 51 mins"
+            android:id="@+id/textView3"
+            android:layout_above="@+id/button_setSteps"
+            android:layout_toRightOf="@+id/button_setSpeed"
+            android:layout_toEndOf="@+id/button_setSpeed" />
 
     </RelativeLayout>
 </ScrollView>

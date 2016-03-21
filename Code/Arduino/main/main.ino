@@ -61,6 +61,7 @@ WiFiServer server(80);
    Serial.println(stepper.currentPosition());
  }
  void moveSlider(String direction){ 
+  isStop = false;
   if (direction.equals("left")){
     Serial.println("moving left");
     //stepper.setSpeed(speed); 
@@ -87,9 +88,13 @@ void changeSpeed(float mot_speed){
 }
 
 void timelapse(String direction){
-  int timelapse_speed = (int) 30287 * pow(2.7183, (-0.013 * timelapse_mins));
+  float timelapse_speed =  9.0f / (timelapse_mins / 60.0f);
+  Serial.println(timelapse_speed);
   if (timelapse_speed > 25000)
     timelapse_speed = 25000;
+
+  isStop = false;
+  
   if (direction.equals("left")){
      stepper.move(steps);
      stepper.setSpeed(timelapse_speed);     
@@ -114,17 +119,15 @@ void processGetRequest(String url){
   }
   
   Serial.println(name);
-
   if (name.equals("left")){
     moveSlider("left");
-    isStop = false;
   }
   else if (name.equals("right")){
     moveSlider("right");
-    isStop = false;
   }
   else if (name.equals("speed"))
     changeSpeed(rev_speed);
+    
   else if (name.equals("stop")){
     Serial.println("stopping");
     isStop = true;
@@ -144,7 +147,7 @@ void processGetRequest(String url){
   else if (name.equals("timelapse_right")){
     timelapse("right");
   }
-  else if (name.equals("timelaspe_left")){
+  else if (name.equals("timelapse_left")){
     timelapse("left");
   }
   else if (name.equals("mins")){
