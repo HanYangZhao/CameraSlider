@@ -9,9 +9,20 @@ This project started with me wanting to take timelapse photos and videos where t
 
 #Test Footage 
 
+Video
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=VQx5hUlplgQ
 " target="_blank"><img src="http://img.youtube.com/vi/VQx5hUlplgQ/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
+
+Timelapse
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=QkDSmGoK8pw
+" target="_blank"><img src="http://img.youtube.com/vi/QkDSmGoK8pw/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
+
+
+
 
 #Photos 
 
