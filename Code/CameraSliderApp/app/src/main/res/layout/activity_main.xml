@@ -43,7 +43,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignLeft="@+id/button_moveLeft"
             android:layout_alignStart="@+id/button_moveLeft"
-            android:text="800" />
+            android:text="40" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -84,7 +84,7 @@
             android:layout_alignLeft="@+id/field_motorSpeed"
             android:layout_alignStart="@+id/field_motorSpeed"
             android:autoText="false"
-            android:text="29000" />
+            android:text="116000" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -171,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="max = 15000"
+            android:text="max = 60000"
             android:id="@+id/textView"
             android:layout_above="@+id/textView3"
             android:layout_alignRight="@+id/textView3"
@@ -181,7 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="max = 29000"
+            android:text="max = 116000"
             android:id="@+id/textView2"
             android:layout_alignBaseline="@+id/field_steps"
             android:layout_alignBottom="@+id/field_steps"
@@ -192,7 +192,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="10 = 51 mins"
+            android:text="40 = 51 mins"
             android:id="@+id/textView3"
             android:layout_above="@+id/button_setSteps"
             android:layout_toRightOf="@+id/button_setSpeed"

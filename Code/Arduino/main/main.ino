@@ -15,12 +15,12 @@ const char *ssid = "CameraSlider";
 const char *password = "thereisnospoon";
 
 float stepper_speed = 10000;
-int max_stepper_speed = 25000;
-int stepper_accel = 10000;
+int max_stepper_speed = 100000;
+int stepper_accel = 1000;
 int timelapse_mins = 60;
 long init_pos = 0;
 long current_pos = 0;
-long steps = 29000;
+long steps = 29000 * 4;
 bool accel_enabled = false;
 bool isStop = false;
 int MS1 = 13;
@@ -39,10 +39,10 @@ WiFiServer server(80);
    pinMode(MS1, OUTPUT);
    pinMode(MS2, OUTPUT);
    pinMode(MS3, OUTPUT);
-   //Microstepping is set to 1/4
-   digitalWrite(MS1, LOW);
+   //Microstepping is set to 1/16
+   digitalWrite(MS1, HIGH);
    digitalWrite(MS2, HIGH);
-   digitalWrite(MS3, LOW);
+   digitalWrite(MS3, HIGH);
    delay(1000);
    Serial.begin(115200);
    Serial.println();
@@ -88,10 +88,10 @@ void changeSpeed(float mot_speed){
 }
 
 void timelapse(String direction){
-  float timelapse_speed =  9.0f / (timelapse_mins / 60.0f);
+  float timelapse_speed =  36.0f / (timelapse_mins / 60.0f);
   Serial.println(timelapse_speed);
-  if (timelapse_speed > 25000)
-    timelapse_speed = 25000;
+  if (timelapse_speed > max_stepper_speed)
+    timelapse_speed = max_stepper_speed;
 
   isStop = false;
   
