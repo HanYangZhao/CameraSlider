@@ -17,8 +17,8 @@ alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
 
 Timelapse
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=QkDSmGoK8pw
-" target="_blank"><img src="http://img.youtube.com/vi/QkDSmGoK8pw/0.jpg" 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=VpbRqibYY6U
+" target="_blank"><img src="http://img.youtube.com/vi/VpbRqibYY6U/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
 
 
