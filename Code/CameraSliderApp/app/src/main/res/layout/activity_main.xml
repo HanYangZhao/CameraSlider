@@ -192,7 +192,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="40 = 51 mins"
+            android:text="40 = 45 mins"
             android:id="@+id/textView3"
             android:layout_above="@+id/button_setSteps"
             android:layout_toRightOf="@+id/button_setSpeed"
