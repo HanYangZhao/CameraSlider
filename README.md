@@ -22,6 +22,9 @@ Timelapse
 alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
 
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=ssHNjMlmGzI
+" target="_blank"><img src="http://img.youtube.com/vi/ssHNjMlmGzI/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
 
 
 #Photos 
