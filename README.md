@@ -39,7 +39,7 @@ Designed using SolidWorks CAD
 
 
 
-#Materials
+# Materials
 
 2 x  1/2 inch copper tubing as rails. I used a meter for each rail.
 
@@ -75,7 +75,7 @@ NEMA 17 Stepper motor with 2x20 Tooth GT2 gears to drive the plate.
 
 2 x usb cables
 
-#Hardware assembly
+# Hardware assembly
 
 Hardware assembly is pretty self-explanatory. You can use the photos in the photo folder to get the idea. The top plate to support the camera includes a hole for 1/4 inch bolts and 3/8 inch bolts. You can either attach you camera directly to the plate or use a micro sliding plate to better control the balance of camera on the plate. This is especially useful for big and heavy camera like the d800.
 
@@ -96,7 +96,7 @@ The MCU will be the esp8266 and the 8-35V input will be the output of the 5 to 1
 
 The logic power supply will be from 2nd output of the power bank.
 
-#Software
+# Software
 
 There are 2 folders. One for the esp8266 code and one for the Android app. The esp8266 acts as a WiFi AP. The Android phone connects to the Esp8266 and controls is by sending html messages.
 
