@@ -2,20 +2,20 @@
 
 This project started with me wanting to take timelapse photos and videos where the camera is sliding on a set of rails. Because my primary application was timelapse photos, I wanted something that was motorized and automated so that I don't have to manually adjust the slider and cause inconsistency the the photos. Additionally, I wanted to be able to control the rig with a smartphone. Commercial products costs over 500$ and none of them are wireless so I thought I'd make something for much cheaper using 3D printed parts and off the shelf components. The final total cost was under 100$. It is still an ongoing project.
 
-#TODO: 
+# TODO: 
 
 
 -iOS app
 
-#Test Footage 
+# Test Footage 
 
-Video
+## Video
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=VQx5hUlplgQ
 " target="_blank"><img src="http://img.youtube.com/vi/VQx5hUlplgQ/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
 
-Timelapse
+## Timelapse
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=VpbRqibYY6U
 " target="_blank"><img src="http://img.youtube.com/vi/VpbRqibYY6U/0.jpg" 
@@ -27,7 +27,7 @@ alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
 alt="IMAGE ALT TEXT HERE" width="640" height="480" border="10" /></a>
 
 
-#Photos 
+# Photos 
 
 ![alt text](https://github.com/HanYangZhao/CameraSlider/blob/master/cad/render/1.JPG)
 
